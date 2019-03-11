@@ -1,0 +1,207 @@
+Sending build context to Docker daemon  5?.??kB
+Step 1/7 : FROM rustlang/rust:nightly
+ ---> 50e9f234c369
+Step 2/7 : RUN curl -L https://github.com/rob-ward/rob-ward-toolchains/archive/e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84.tar.gz | tar -xz -C /opt
+ ---> Running in 9bff74c1bf0e
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   170    0   170    0     0    203      0 --:--:-- --:--:-- --:--:--   202
+100  432M    0  432M    0     0   875k      0 --:--:--  0:08:26 --:--:-- 1218k
+Step 3/7 : RUN     rustup component add rust-src &&     cargo install xargo &&     true
+ ---> Running in 75dc27afa9f3
+info: downloading component 'rust-src'
+info: installing component 'rust-src'
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded xargo v0.3.13
+  Installing xargo v0.3.13
+ Downloading crates ...
+  Downloaded dirs v1.0.5
+  Downloaded fs2 v0.4.3
+  Downloaded error-chain v0.7.2
+  Downloaded tempdir v0.3.7
+  Downloaded toml v0.2.1
+  Downloaded walkdir v1.0.7
+  Downloaded libc v0.2.50
+  Downloaded remove_dir_all v0.5.1
+  Downloaded serde_json v0.8.6
+  Downloaded rustc_version v0.1.7
+  Downloaded rustc-serialize v0.3.24
+  Downloaded backtrace v0.3.14
+  Downloaded rand v0.4.6
+  Downloaded num-traits v0.1.43
+  Downloaded itoa v0.1.1
+  Downloaded serde v0.8.23
+  Downloaded same-file v0.1.3
+  Downloaded rustc-demangle v0.1.13
+  Downloaded backtrace-sys v0.1.28
+  Downloaded semver v0.1.20
+  Downloaded autocfg v0.1.2
+  Downloaded dtoa v0.2.2
+  Downloaded num-traits v0.2.6
+  Downloaded cfg-if v0.1.7
+  Downloaded cc v1.0.30
+   Compiling cc v1.0.30
+   Compiling libc v0.2.50
+   Compiling num-traits v0.2.6
+   Compiling autocfg v0.1.2
+   Compiling rustc-demangle v0.1.13
+   Compiling cfg-if v0.1.7
+   Compiling remove_dir_all v0.5.1
+   Compiling semver v0.1.20
+   Compiling serde v0.8.23
+   Compiling dtoa v0.2.2
+   Compiling same-file v0.1.3
+   Compiling rustc-serialize v0.3.24
+   Compiling xargo v0.3.13
+   Compiling itoa v0.1.1
+   Compiling backtrace v0.3.14
+   Compiling rustc_version v0.1.7
+   Compiling walkdir v1.0.7
+   Compiling backtrace-sys v0.1.28
+   Compiling rand v0.4.6
+   Compiling fs2 v0.4.3
+   Compiling dirs v1.0.5
+   Compiling num-traits v0.1.43
+   Compiling serde_json v0.8.6
+   Compiling toml v0.2.1
+   Compiling tempdir v0.3.7
+   Compiling error-chain v0.7.2
+    Finished release [optimized] target(s) in 1m 32s
+  Installing /usr/local/cargo/bin/xargo
+Step 4/7 : RUN     export USER=root;     cargo new --bin /tmp/qwer &&     cd /tmp/qwer &&     printf '[profile.release]\n' >> Cargo.toml &&     printf 'panic="abort"\n' >> Cargo.toml &&     printf 'lto=true\n' >> Cargo.toml &&     printf 'opt-level="s"\n' >> Cargo.toml &&     printf 'codegen-units=1\n' >> Cargo.toml &&     printf '[dependencies]\n' >> Xargo.toml &&     printf 'std = {}\n' >> Xargo.toml &&     xargo build --release --target=x86_64-unknown-linux-gnu &&     target/x86_64-unknown-linux-gnu/release/qwer &&     rm -Rf target/ &&     true
+ ---> Running in d77c6cbb31fd
+     Created binary (application) `/tmp/qwer` package
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded rustc-demangle v0.1.12
+  Downloaded cmake v0.1.35
+  Downloaded compiler_builtins v0.1.7
+   Compiling cc v1.0.30
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling libc v0.2.50
+   Compiling build_helper v0.1.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/build_helper)
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling cmake v0.1.35
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc_asan v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/librustc_asan)
+   Compiling rustc_lsan v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/librustc_lsan)
+   Compiling rustc_msan v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/librustc_msan)
+   Compiling rustc_tsan v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/librustc_tsan)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling rustc-demangle v0.1.12
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+    Finished release [optimized] target(s) in 1m 23s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 2.06s
+Hello, world!
+Removing intermediate container d77c6cbb31fd
+ ---> 268a3ac58368
+Step 5/7 : ENV USER=root
+ ---> Running in 83fb3b9f63bb
+Removing intermediate container 83fb3b9f63bb
+ ---> 7329ab6c4726
+Step 6/7 : RUN     ln -s /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/x86_64-linux-musl/bin/x86_64-linux-musl-gcc /usr/local/bin/musl-gcc &&     ln -s /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/bin/arm-linux-musleabi-gcc /usr/local/bin/arm-linux-musleabi-gcc &&     ln -s /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabihf/bin/arm-linux-musleabihf-gcc /usr/local/bin/arm-linux-musleabihf-gcc &&     mkdir /.cargo &&     printf '[target.x86_64-unknown-linux-musl]\n' >> /.cargo/config &&     printf 'rustflags=["-L","native=/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/x86_64-linux-musl/x86_64-linux-musl/lib"]\n' >> /.cargo/config &&     ar q /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/x86_64-linux-musl/x86_64-linux-musl/lib/libunwind.a &&     printf '[target.arm-unknown-linux-musleabi]\n' >> /.cargo/config &&     printf 'rustflags=["-L","native=/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/arm-linux-musleabi/lib"]\n' >> /.cargo/config &&     printf 'linker="/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/bin/arm-linux-musleabi-gcc"\n' >> /.cargo/config &&     ar q /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/arm-linux-musleabi/lib/libunwind.a &&     printf '[target.arm-unknown-linux-musleabihf]\n' >> /.cargo/config &&    printf 'rustflags=["-L","native=/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabihf/arm-linux-musleabihf/lib"]\n' >> /.cargo/config &&     printf 'linker="/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabihf/bin/arm-linux-musleabihf-gcc"\n' >> /.cargo/config &&     ar q /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabihf/arm-linux-musleabihf/lib/libunwind.a &&     printf '[target.mips-unknown-linux-musl]\n' >> /.cargo/config &&     printf 'rustflags=["-L","native=/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/mips-linux-musl/lib"]\n' >> /.cargo/config &&     printf 'linker="/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/bin/mips-linux-musl-gcc"\n' >> /.cargo/config &&     ar q /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/mips-linux-musl/lib/libunwind.a &&     printf '[target.mipsel-unknown-linux-musl]\n' >> /.cargo/config &&     printf 'rustflags=["-L","native=/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mipsel-linux-musl/mipsel-linux-musl/lib"]\n' >> /.cargo/config &&     printf 'linker="/opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mipsel-linux-musl/bin/mipsel-linux-musl-gcc"\n' >> /.cargo/config &&     ar q /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mipsel-linux-musl/mipsel-linux-musl/lib/libunwind.a &&     true
+ ---> Running in 36828c2c8afb
+ar: creating /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/x86_64-linux-musl/x86_64-linux-musl/lib/libunwind.a
+ar: creating /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/arm-linux-musleabi/lib/libunwind.a
+ar: creating /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabihf/arm-linux-musleabihf/lib/libunwind.a
+ar: creating /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/mips-linux-musl/lib/libunwind.a
+ar: creating /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mipsel-linux-musl/mipsel-linux-musl/lib/libunwind.a
+Removing intermediate container 36828c2c8afb
+ ---> e17e238e4d3b
+Step 7/7 : RUN     cd /tmp/qwer &&     xargo build --release --target=x86_64-unknown-linux-musl &&     xargo build --release --target=arm-unknown-linux-musleabi &&     xargo build --release --target=arm-unknown-linux-musleabihf &&     xargo build --release --target=mips-unknown-linux-musl &&     xargo build --release --target=mipsel-unknown-linux-musl &&     strip target/x86_64-unknown-linux-musl/release/qwer -o x86_64 &&     /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/bin/arm-linux-musleabi-strip target/arm-unknown-linux-musleabi/release/qwer -o arm &&     /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/arm-linux-musleabi/bin/arm-linux-musleabi-strip target/arm-unknown-linux-musleabihf/release/qwer -o armhf &&     /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/bin/mips-linux-musl-strip target/mips-unknown-linux-musl/release/qwer -o mips &&     /opt/rob-ward-toolchains-e50c8ed001b7eabb30681a8ec0b14f1e9fd3bf84/mips-linux-musl/bin/mips-linux-musl-strip target/mipsel-unknown-linux-musl/release/qwer -o mipsel &&     ls -1sh x86_64 arm armhf mips mipsel  && file x86_64 arm armhf mips mipsel &&     ./x86_64 &&     rm -Rf target/ &&     true
+ ---> Running in e445a05eb2b3
+    Updating crates.io index
+   Compiling cc v1.0.30
+   Compiling libc v0.2.50
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+   Compiling rustc-demangle v0.1.12
+warning: dropping unsupported crate type `dylib` for target `x86_64-unknown-linux-musl`
+
+    Finished release [optimized] target(s) in 1m 16s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 1.97s
+    Updating crates.io index
+   Compiling cc v1.0.30
+   Compiling libc v0.2.50
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+   Compiling rustc-demangle v0.1.12
+warning: dropping unsupported crate type `dylib` for target `arm-unknown-linux-musleabi`
+
+    Finished release [optimized] target(s) in 1m 05s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 1.87s
+    Updating crates.io index
+   Compiling cc v1.0.30
+   Compiling libc v0.2.50
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling rustc-demangle v0.1.12
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+warning: dropping unsupported crate type `dylib` for target `arm-unknown-linux-musleabihf`
+
+    Finished release [optimized] target(s) in 1m 04s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 1.74s
+    Updating crates.io index
+   Compiling cc v1.0.30
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling libc v0.2.50
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling rustc-demangle v0.1.12
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+    Finished release [optimized] target(s) in 1m 02s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 1.63s
+    Updating crates.io index
+   Compiling cc v1.0.30
+   Compiling libc v0.2.50
+   Compiling core v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore)
+   Compiling unwind v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libunwind)
+   Compiling compiler_builtins v0.1.7
+   Compiling std v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd)
+   Compiling rustc-std-workspace-core v1.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/tools/rustc-std-workspace-core)
+   Compiling alloc v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/liballoc)
+   Compiling rustc-demangle v0.1.12
+   Compiling panic_abort v0.0.0 (/usr/local/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libpanic_abort)
+    Finished release [optimized] target(s) in 1m 02s
+   Compiling qwer v0.1.0 (/tmp/qwer)
+    Finished release [optimized] target(s) in 1.60s
+68K arm
+68K armhf
+68K mips
+68K mipsel
+64K x86_64
+x86_64: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, BuildID[sha1]=d2392e42038410a4f381d229b23da97198ee0209, stripped
+arm:    ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, stripped
+armhf:  ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, stripped
+mips:   ELF 32-bit MSB shared object, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-mips.so.1, stripped
+mipsel: ELF 32-bit LSB shared object, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-mipsel.so.1, stripped
+Hello, world!
+Removing intermediate container e445a05eb2b3
+ ---> bf6f04ed4b52
+Successfully built bf6f04ed4b52
+Successfully tagged xargo-musl:latest
